@@ -70,9 +70,7 @@ class Post(db.Model):
 
 try:
     db.create_all()
-    print 1
-except Exception, e:
-    print e
+except Exception:
     pass
 
 def is_admin():
@@ -149,7 +147,6 @@ def view_post(post_id):
 
 @app.route("/<slug>")
 def view_post_slug(slug):
-    print slug
     try:
         post = db.session.query(Post).filter_by(slug=slug, draft=False).one()
     except Exception:
@@ -245,7 +242,6 @@ def save_post(post_id):
     if post.title != request.form.get("title", ""):
         post.title = request.form.get("title","")
         post.slug = slugify(post.title)
-        print repr(post.slug)
     post.set_content(request.form.get("content", ""))
     post.updated_at = datetime.datetime.now()
     db.session.add(post)
