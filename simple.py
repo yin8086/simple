@@ -48,7 +48,7 @@ class Post(db.Model):
     __tablename__ = "posts"
     id    = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String())
-    slug  = db.Column(db.String(collation='utf8'), unique=True)
+    slug  = db.Column(db.String(convert_unicode=True), unique=True)
     text  = db.Column(db.String(), default="")
     draft = db.Column(db.Boolean(), index=True, default=True)
     views = db.Column(db.Integer(), default=0)
