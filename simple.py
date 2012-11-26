@@ -70,7 +70,9 @@ class Post(db.Model):
 
 try:
     db.create_all()
-except Exception:
+    print 1
+except Exception, e:
+    print e
     pass
 
 def is_admin():
