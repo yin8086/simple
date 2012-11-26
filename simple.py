@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """ simple """
 
 # python imports
@@ -95,24 +96,26 @@ def requires_authentication(func):
 @app.route("/")
 def index():
     """ Index Page. Here is where the magic starts """
-    page = request.args.get("page", 0, type=int)
-    posts_master = db.session.query(Post)\
-                       .filter_by(draft=False)\
-                       .order_by(Post.created_at.desc())
-    
-    posts_count = posts_master.count()
+    try:
+        page = request.args.get("page", 0, type=int)
+        posts_master = db.session.query(Post)\
+                           .filter_by(draft=False)\
+                           .order_by(Post.created_at.desc())
+        
+        posts_count = posts_master.count()
 
-    posts = posts_master\
-                .limit(app.config["POSTS_PER_PAGE"])\
-                .offset(page * app.config["POSTS_PER_PAGE"])\
-                .all()
+        posts = posts_master\
+                    .limit(app.config["POSTS_PER_PAGE"])\
+                    .offset(page * app.config["POSTS_PER_PAGE"])\
+                    .all()
 
-    # Sorry for the verbose names, but this seemed like a sensible
-    # thing to do.
-    last_possible_post_on_page = page * app.config["POSTS_PER_PAGE"]\
-                               + app.config["POSTS_PER_PAGE"]
-    there_is_more = posts_count > last_possible_post_on_page
-
+        # Sorry for the verbose names, but this seemed like a sensible
+        # thing to do.
+        last_possible_post_on_page = page * app.config["POSTS_PER_PAGE"]\
+                                   + app.config["POSTS_PER_PAGE"]
+        there_is_more = posts_count > last_possible_post_on_page
+    except Exception, e:
+        print e
     return render_template("index.html", 
                            posts=posts, 
                            now=datetime.datetime.now(),

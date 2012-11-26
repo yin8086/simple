@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """ utility for generating a configuration file for a simple blog """
 from werkzeug.security import generate_password_hash
 
