@@ -38,7 +38,7 @@
                     <p><a class="btn btn-inverse" href="{{ url_for("admin") }}">管理员</a></p>
                     <p><a class="btn btn-inverse" href="{{ url_for('delete', post_id=post.id, next="admin") }}">删除</a> </p>
                     <p>
-                        <label for="post_draft">Draft</label>
+                        <label for="post_draft">草稿</label>
                         <input name="post_draft" type="hidden" value="0" /><input id="post_draft" name="post_draft" type="checkbox" value="1" {% if post.draft %}checked{% endif %} />
                     </p>
                     <p>
