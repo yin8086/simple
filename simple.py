@@ -4,7 +4,7 @@
 # python imports
 import re
 import datetime
-import os
+import os,urllib
 from functools import wraps
 from unicodedata import normalize
 
@@ -274,7 +274,8 @@ def slugify(text, delim=u'-'):
     """Generates an slightly worse ASCII-only slug."""
     result = []
     for word in _punct_re.split(text.lower()):
-        word = normalize('NFKD', unicode(word)).encode('ascii', 'ignore')
+        #word = normalize('NFKD', unicode(word)).encode('ascii', 'ignore')
+        word = urllib.quote(normalize('NFKD', unicode(word)).encode('utf-8'))
         if word:
             result.append(word)
     slug = unicode(delim.join(result))
