@@ -41,6 +41,7 @@ class Post(db.Model):
         if title:
             self.title = title
             self.slug = slugify(title)
+            print repr(self.slug)
         if created_at:
             self.created_at = created_at
             self.updated_at = created_at
@@ -191,6 +192,7 @@ def edit(post_id):
         if post.title != request.form.get("post_title", ""):
             post.title = request.form.get("post_title","")
             post.slug = slugify(post.title)
+            print repr(post.slug)
         post.set_content(request.form.get("post_content",""))
         post.updated_at = datetime.datetime.now()
 
@@ -241,6 +243,7 @@ def save_post(post_id):
     if post.title != request.form.get("title", ""):
         post.title = request.form.get("title","")
         post.slug = slugify(post.title)
+        print repr(post.slug)
     post.set_content(request.form.get("content", ""))
     post.updated_at = datetime.datetime.now()
     db.session.add(post)
