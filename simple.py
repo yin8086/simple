@@ -243,7 +243,7 @@ def save_post(post_id):
     if post.title != request.form.get("title", ""):
         post.title = request.form.get("title","")
         post.slug = slugify(post.title)
-        
+        print repr(post.slug)
     post.set_content(request.form.get("content", ""))
     post.updated_at = datetime.datetime.now()
     db.session.add(post)
