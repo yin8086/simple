@@ -278,7 +278,8 @@ def slugify(text, delim='-'):
     result = []
     for word in _punct_re.split(text.lower()):
         #word = normalize('NFKD', unicode(word)).encode('ascii', 'ignore')
-        word = urllib.quote(normalize('NFKD', unicode(word)).encode('utf-8'))
+        #word = urllib.quote(normalize('NFKD', unicode(word)).encode('utf-8'))
+        word = normalize('NFKD', unicode(word)).encode('utf-8')
         if word:
             result.append(word)
     slug = delim.join(result)
