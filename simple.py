@@ -270,7 +270,7 @@ def feed():
     response.mimetype = "application/xml"
     return response
 
-def slugify(text, delim=u'-'):
+def slugify(text, delim='-'):
     """Generates an slightly worse ASCII-only slug."""
     result = []
     for word in _punct_re.split(text.lower()):
@@ -278,7 +278,7 @@ def slugify(text, delim=u'-'):
         word = urllib.quote(normalize('NFKD', unicode(word)).encode('utf-8'))
         if word:
             result.append(word)
-    slug = unicode(delim.join(result))
+    slug = delim.join(result)
     # This could have issues if a post is marked as draft, then live, then 
     # draft, then live and there are > 1 posts with the same slug. Oh well.
     count = db.session.query(Post).filter_by(slug=slug).count()
