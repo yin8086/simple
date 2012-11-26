@@ -28,13 +28,13 @@
     <ul class="pager">
         {% if current_page > 0 %}
             <li class="previous">
-                <a href="{{ url_for("index", page=current_page - 1) }}">&larr; ǰһƪ</a>
+                <a href="{{ url_for("index", page=current_page - 1) }}">&larr; 前一篇</a>
             </li>
         {% endif %}
 
         {% if is_more %}
             <li class="next">
-                <a href="{{ url_for("index", page=current_page + 1) }}">��һƪ  &rarr;</a>
+                <a href="{{ url_for("index", page=current_page + 1) }}">后一篇  &rarr;</a>
             </li>
         {% endif %}
     </ul>

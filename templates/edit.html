@@ -34,21 +34,21 @@
         <div class="row-fluid">
             <form accept-charset="UTF-8" action="" class="edit_post" id="edit_post" method="post">
                 <div class="span2 sidebar-nav-fixed" style="padding: 60px 0;">
-                    <p><a class="btn btn-inverse" href="{{ url_for("admin") }}">π‹¿Ì‘±</a></p>
-                    <p><a class="btn btn-inverse" href="{{ url_for('delete', post_id=post.id, next="admin") }}">Delete…æ≥˝</a> </p>
+                    <p><a class="btn btn-inverse" href="{{ url_for("admin") }}">ÁÆ°ÁêÜÂëò</a></p>
+                    <p><a class="btn btn-inverse" href="{{ url_for('delete', post_id=post.id, next="admin") }}">DeleteÂà†Èô§</a> </p>
                     <p>
                         <label for="post_draft">Draft</label>
                         <input name="post_draft" type="hidden" value="0" /><input id="post_draft" name="post_draft" type="checkbox" value="1" {% if post.draft %}checked{% endif %} />
                     </p>
                     <p>
                         {% if post.draft %}
-                            <a class="btn btn-inverse" href="#" onclick="issueSaveAjax({{ post.id }}, true); return false;" target="_blank">‘§¿¿</a>
+                            <a class="btn btn-inverse" href="#" onclick="issueSaveAjax({{ post.id }}, true); return false;" target="_blank">È¢ÑËßà</a>
                         {% else %}
-                            <a class="btn btn-inverse" href="{{  url_for('view_post_slug', slug=post.slug) }}" target="_blank">≤Èø¥</a>
+                            <a class="btn btn-inverse" href="{{  url_for('view_post_slug', slug=post.slug) }}" target="_blank">Êü•Áúã</a>
                         {% endif %}
                     </p>
                     <p>
-                        <button class="btn btn-inverse" onclick="$('#edit_post').submit()">±£¥Ê</button>
+                        <button class="btn btn-inverse" onclick="$('#edit_post').submit()">‰øùÂ≠ò</button>
                     </p>
                 </div>
 
@@ -61,7 +61,7 @@
                             <div class="span7 offset3">
                                 <div class="expandingArea text-title">
                                     <pre><span></span><br></pre>
-                                    <textarea class="post_title" id="post_title" name="post_title" placeholder="±ÍÃ‚" rows="1">{{ post.title }}</textarea>
+                                    <textarea class="post_title" id="post_title" name="post_title" placeholder="Ê†áÈ¢ò" rows="1">{{ post.title }}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -70,7 +70,7 @@
                             <div class="span7 offset3">
                                 <div class="expandingArea text-content" id="edit_post_area">
                                     <pre><span></span><br></pre>
-                                    <textarea cols="40" id="post_content" name="post_content" placeholder="Œƒ’¬ƒ⁄»›" rows="20">{{ post.text }}</textarea>
+                                    <textarea cols="40" id="post_content" name="post_content" placeholder="ÊñáÁ´†ÂÜÖÂÆπ" rows="20">{{ post.text }}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -86,10 +86,10 @@
             <div id="publish-bar">
                 <div class="contain">
                     <div>
-                        <a href="{{ url_for('admin') }}">π‹¿Ì‘±</a>
+                        <a href="{{ url_for('admin') }}">ÁÆ°ÁêÜÂëò</a>
                     </div>
                     <div>
-                        <a href="{{ url_for('delete', post_id=post.id, next="admin" ) }}" class="delete-bar" data-confirm="ƒ„»∑∂®¬?" rel="nofollow">Delete</a>
+                        <a href="{{ url_for('delete', post_id=post.id, next="admin" ) }}" class="delete-bar" data-confirm="‰Ω†Á°ÆÂÆöÂêó?" rel="nofollow">Delete</a>
                     </div>
 
                 </div>
