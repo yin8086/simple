@@ -2,6 +2,7 @@
 <html lang="en">
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
         <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet" media="screen">
         <link href="{{ url_for('static', filename='css/layout.css') }}" rel="stylesheet" media="screen">
         <link href='http://fonts.googleapis.com/css?family={{ config.FONT_NAME|replace(' ','+') }}:400,900' rel='stylesheet' type='text/css'>
@@ -39,7 +40,7 @@
                                 <li><p><a href="https://github.com/{{ config.GITHUB_USERNAME }}/">Github</a></p></li>
                             {% endif %}
                             {% if config.CONTACT_EMAIL %}
-                                <li><p><p><a href="mailto:{{ config.CONTACT_EMAIL }}?subject:Howdy">Email me</a></p></li>
+                                <li><p><p><a href="mailto:{{ config.CONTACT_EMAIL }}?subject:Howdy">联系我</a></p></li>
                             {% endif %}
                             {% if config.TWITTER_HANDLE %}
                                 <li><p><a href="https://twitter.com/{{ config.TWITTER_HANDLE }}/">Twitter</a></p></li>
@@ -49,12 +50,12 @@
                             {% endif %}
 
                             <li>
-                                <p><a href="{{ url_for('feed') }}">Feed</a></p>
+                                <p><a href="{{ url_for('feed') }}">订阅</a></p>
                             </li>
 
                             {% if is_admin %}
                                 <li>
-                                    <p><a href="{{ url_for('admin') }}">Admin</a></p>
+                                    <p><a href="{{ url_for('admin') }}">管理员</a></p>
                                 </li>
                             {% endif %}
 
