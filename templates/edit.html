@@ -36,7 +36,7 @@
             <form accept-charset="UTF-8" action="" class="edit_post" id="edit_post" method="post">
                 <div class="span2 sidebar-nav-fixed" style="padding: 60px 0;">
                     <p><a class="btn btn-inverse" href="{{ url_for("admin") }}">管理员</a></p>
-                    <p><a class="btn btn-inverse" href="{{ url_for('delete', post_id=post.id, next="admin") }}">Delete删除</a> </p>
+                    <p><a class="btn btn-inverse" href="{{ url_for('delete', post_id=post.id, next="admin") }}">删除</a> </p>
                     <p>
                         <label for="post_draft">Draft</label>
                         <input name="post_draft" type="hidden" value="0" /><input id="post_draft" name="post_draft" type="checkbox" value="1" {% if post.draft %}checked{% endif %} />
@@ -90,7 +90,7 @@
                         <a href="{{ url_for('admin') }}">管理员</a>
                     </div>
                     <div>
-                        <a href="{{ url_for('delete', post_id=post.id, next="admin" ) }}" class="delete-bar" data-confirm="你确定吗?" rel="nofollow">Delete</a>
+                        <a href="{{ url_for('delete', post_id=post.id, next="admin" ) }}" class="delete-bar" data-confirm="你确定吗?" rel="nofollow">删除</a>
                     </div>
 
                 </div>
