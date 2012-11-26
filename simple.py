@@ -18,6 +18,7 @@ from werkzeug.contrib.cache import FileSystemCache, NullCache
 
 app = Flask(__name__)
 app.config.from_object('settings')
+app.debug = True
 db = SQLAlchemy(app)
 cache_directory = os.path.dirname(__file__)
 try:

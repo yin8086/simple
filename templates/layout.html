@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
     <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-        <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet" media="screen">
-        <link href="{{ url_for('static', filename='css/layout.css') }}" rel="stylesheet" media="screen">
-        <link href='http://fonts.googleapis.com/css?family={{ config.FONT_NAME|replace(' ','+') }}:400,900' rel='stylesheet' type='text/css'>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet" media="screen" />
+        <link href="{{ url_for('static', filename='css/layout.css') }}" rel="stylesheet" media="screen" />
+        <link href='http://fonts.googleapis.com/css?family={{ config.FONT_NAME|replace(' ','+') }}:400,900' rel='stylesheet' type='text/css' />
         <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-1.7.2.min.js') }}"></script>
         <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap-modal.js') }}"></script>
-        <link href="/style.css" rel="stylesheet" type="text/css">
-        <link href="{{ url_for('static', filename='css/prettify.css') }}" rel="stylesheet" type="text/css">
+        <link href="/style.css" rel="stylesheet" type="text/css" />
+        <link href="{{ url_for('static', filename='css/prettify.css') }}" rel="stylesheet" type="text/css" />
         <script src="{{ url_for('static', filename='js/prettify.js') }}" type="text/javascript"></script>
         {% block title %}{% endblock %}
         {% block head %}{% endblock %}
@@ -40,7 +40,7 @@
                                 <li><p><a href="https://github.com/{{ config.GITHUB_USERNAME }}/">Github</a></p></li>
                             {% endif %}
                             {% if config.CONTACT_EMAIL %}
-                                <li><p><p><a href="mailto:{{ config.CONTACT_EMAIL }}?subject:Howdy">¡™œµŒ“</a></p></li>
+                                <li><p><p><a href="mailto:{{ config.CONTACT_EMAIL }}?subject:Howdy">ËÅîÁ≥ªÊàë</a></p></li>
                             {% endif %}
                             {% if config.TWITTER_HANDLE %}
                                 <li><p><a href="https://twitter.com/{{ config.TWITTER_HANDLE }}/">Twitter</a></p></li>
@@ -50,12 +50,12 @@
                             {% endif %}
 
                             <li>
-                                <p><a href="{{ url_for('feed') }}">∂©‘ƒ</a></p>
+                                <p><a href="{{ url_for('feed') }}">ËÆ¢ÈòÖ</a></p>
                             </li>
 
                             {% if is_admin %}
                                 <li>
-                                    <p><a href="{{ url_for('admin') }}">π‹¿Ì‘±</a></p>
+                                    <p><a href="{{ url_for('admin') }}">ÁÆ°ÁêÜÂëò</a></p>
                                 </li>
                             {% endif %}
 
