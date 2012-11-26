@@ -148,6 +148,7 @@ def view_post(post_id):
 
 @app.route("/<slug>")
 def view_post_slug(slug):
+    print slug
     try:
         post = db.session.query(Post).filter_by(slug=slug, draft=False).one()
     except Exception:
