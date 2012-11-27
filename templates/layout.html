@@ -87,9 +87,9 @@
                     <div class="span12">
                         <time>
                             {% if post %}
-                                Posted {{ post.created_at.strftime(u'%Y年%m月%d日'.encode('utf-8')).decode('utf-8')) }}
-                                {% if post.created_at.strftime(u'%Y年%m月%d日'.encode('utf-8')).decode('utf-8')) != post.updated_at.strftime(u'%Y年%m月%d日'.encode('utf-8')).decode('utf-8')) %}
-                                    , Updated {{ post.updated_at.strftime(u'%Y年%m月%d日'.encode('utf-8')).decode('utf-8')) }}
+                                Posted {{ post.created_at.strftime(u'%Y年%m月%d日'.encode('utf-8')).decode('utf-8') }}
+                                {% if post.created_at.strftime(u'%Y年%m月%d日'.encode('utf-8')).decode('utf-8') != post.updated_at.strftime(u'%Y年%m月%d日'.encode('utf-8')).decode('utf-8') %}
+                                    , Updated {{ post.updated_at.strftime(u'%Y年%m月%d日'.encode('utf-8')).decode('utf-8') }}
                                 {% endif %}
                             {% else %}
                                 <div class="visible-phone">
@@ -97,7 +97,7 @@
                                     <span>{{ config.BLOG_TAGLINE }}</span>
                                 </div>
                                 <div class="hidden-phone">
-                                    {{ now.strftime(u'%Y年%m月%d日'.encode('utf-8')).decode('utf-8')) }}
+                                    {{ now.strftime(u'%Y年%m月%d日'.encode('utf-8')).decode('utf-8') }}
                                 </div>
                             {% endif %}
                         </time>
