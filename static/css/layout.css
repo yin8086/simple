@@ -142,11 +142,11 @@ header li a:hover {
     /* Hide the text; just using it for sizing */
     visibility: hidden; }
 
-#post_container .p
+#post_container p
 {
     text-indent: 2em;
 }
-#content .p
+#content p
 {
     text-indent: 2em;
 }
