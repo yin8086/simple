@@ -32,7 +32,7 @@ except Exception,e:
 
 _punct_re = re.compile(r'[\t !"#$%&\'()*\-/<=>?@\[\\\]^_`{|},.]+')
 
-MARKDOWN_PARSER = markdown.Markdown(extensions=['fenced_code'], 
+MARKDOWN_PARSER = markdown.Markdown(extensions=['fenced_code', 'footnotes', 'codehilite'], 
                                     output_format="html5", 
                                     safe_mode=True)
 
