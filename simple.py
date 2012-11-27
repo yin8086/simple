@@ -4,7 +4,7 @@
 # python imports
 import re
 import datetime
-import os,urllib
+import os
 from functools import wraps
 from unicodedata import normalize
 
@@ -48,7 +48,6 @@ class Post(db.Model):
     __tablename__ = "posts"
     id    = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String())
-    #slug  = db.Column(db.String(convert_unicode=True), unique=True)
     slug  = db.Column(db.LargeBinary(), unique=True)
     text  = db.Column(db.String(), default="")
     draft = db.Column(db.Boolean(), index=True, default=True)
@@ -278,8 +277,6 @@ def slugify(text, delim='-'):
     """Generates an slightly worse ASCII-only slug."""
     result = []
     for word in _punct_re.split(text.lower()):
-        #word = normalize('NFKD', unicode(word)).encode('ascii', 'ignore')
-        #word = urllib.quote(normalize('NFKD', unicode(word)).encode('utf-8'))
         word = normalize('NFKD', unicode(word)).encode('utf-8')
         if word:
             result.append(word)
