@@ -88,7 +88,7 @@
                         <time>
                             {% if post %}
                                 发表于 {{ post.created_at.strftime('%Y-%m-%d') }}
-                                {% if post.created_at.strftime('%Y-%m-%d')) != post.updated_at.strftime('%Y-%m-%d') %}
+                                {% if post.created_at.strftime('%Y-%m-%d') != post.updated_at.strftime('%Y-%m-%d') %}
                                     , 更新于 {{ post.updated_at.strftime('%Y-%m-%d') }}
                                 {% endif %}
                             {% else %}
