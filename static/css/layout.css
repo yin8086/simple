@@ -36,7 +36,9 @@ h1 {
     font-size: 30px;
 }
 p {
-    color: #1d1d1d; }
+    color: #1d1d1d; 
+    text-indent: 2em;
+}
 
 a,
 a:visited
@@ -141,12 +143,3 @@ header li a:hover {
     display: block;
     /* Hide the text; just using it for sizing */
     visibility: hidden; }
-
-#post_container p
-{
-    text-indent: 2em;
-}
-#content p
-{
-    text-indent: 2em;
-}
