@@ -2,6 +2,8 @@ Simple
 ================
 A clone of [Obtvse](http://github.com/NateW/obtvse).
 
+这是一个中文化的[Simple](https://github.com/orf/simple) 版本
+
 About
 ============
 The point of Simple is to be simple. The blog is 1 file (excluding resources) with a few simple pure-python dependancies (Flask, Sqlalchemy, Markdown), it doesn't require a database server, has a small footprint and is fairly fast.
@@ -32,10 +34,12 @@ Example
 ============
 You can see my blog running this software [here](http://tomforb.es/simple).
 
+中文版运行于[这里](http://pyblog.stardrad.com)
+
 Screenshots
 ===========
-![Admin](http://i.imgur.com/M4i0ahm.png)
+![Admin](http://i1323.photobucket.com/albums/u585/yin8086/00_zps9eaecb09.png)
 
-![Draft](http://i.imgur.com/rbpdPdn.png)
+![Draft](http://i1323.photobucket.com/albums/u585/yin8086/01_zps3c7ea108.png)
 
-![Live](http://i.imgur.com/tsiSsED.png)
+![Live](http://i1323.photobucket.com/albums/u585/yin8086/02_zps7afd8c41.png)
