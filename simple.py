@@ -158,8 +158,6 @@ def view_post(post_id):
 
 @app.route("/<slug>")
 def view_post_slug(slug):
-    # slug = slug.encode('utf-8')
-    
 
     try:
         post = db.session.query(Post).filter_by(slug=slug, draft=False).one()
