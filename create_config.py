@@ -23,7 +23,8 @@ SETTINGS = (
     input_with_default("Blog title", ""),
     input_with_default("Blog tagline", ""),
     input_with_default("Blog URL (e.g. /blog)","/"),
-    input_with_default("Font Name (Selected from google font library): ","Source Sans Pro").replace(" ","+")
+    input_with_default("Font Name (Selected from google font library): ","Source Sans Pro").replace(" ","+"),
+    input_with_default("Disqus Shortname", "")
 )
 
 with open("settings.py", "w") as fd:
@@ -40,7 +41,8 @@ CONTACT_EMAIL = '%s'
 BLOG_TITLE = "%s"
 BLOG_TAGLINE = "%s"
 BLOG_URL = '%s'
-FONT_NAME = '%s'\n""" % SETTINGS)
+FONT_NAME = '%s',
+DISQUS_SHORTNAME = '%s'\n""" % SETTINGS)
     fd.flush()
 
 print "Created!"
