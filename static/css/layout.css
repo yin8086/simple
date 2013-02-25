@@ -37,9 +37,10 @@ h1 {
 }
 p {
     color: #1d1d1d; 
+}
+.post_container p {
     text-indent: 2em;
 }
-
 a,
 a:visited
 a:active{
