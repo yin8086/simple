@@ -10,11 +10,49 @@
         {
             position: fixed;
         }
+
+        div#drop-upload{
+            font-size: 13px;
+        }
+        div#drop-upload input{
+            font-size: 13px;
+        }
     </style>
 
 {% endblock %}
 
 {% block head %}
+        <script>
+            window.ondragover = function(e) {e.preventDefault()};
+            window.ondrop = function(e) {e.preventDefault(); upload(e.dataTransfer.files); };
+
+            function upload(files) {
+                $("#upload_list").empty();
+                $(files).each(function(i,file){
+                    if (!file || !file.type.match(/image.*/)) return;
+
+                    var fd = new FormData();
+                    fd.append("file", file);
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("POST", "/upload");
+                    xhr.onload = function() {
+                        console.log(xhr.responseText);
+                        var resp = JSON.parse(xhr.responseText);
+                        $("#upload_list").append("<p><a class='uploadUrl' target='_blank' href='" + resp.url + "'>" + resp.name + "</a></p>")
+                    };
+                    xhr.send(fd);
+                })
+            }
+
+            $(document).ready(function(){
+                $("#upload_list").on('click', '.uploadUrl', function(ev){
+                    $("#post_content").val($("#post_content").val() + '\n![](' + $(this).attr('href') + ')');
+                    ev.preventDefault();
+                })
+            })
+        </script>
+
+
     {% if post.draft %}
         <script type="text/javascript">
             function SaveTick(){
@@ -22,6 +60,7 @@
                 // Save first after 10 seconds, then 4 from then onwards.
                 setTimeout("SaveTick()", 4000);
             }
+
             $(document).ready(function(){
                 setTimeout("SaveTick();", 10000);
             })
@@ -36,25 +75,33 @@
         <div class="row-fluid">
             <form accept-charset="UTF-8" action="" class="edit_post" id="edit_post" method="post">
                 <div class="span2 sidebar-nav-fixed" style="padding: 60px 0;">
-                    <p><a class="btn btn-inverse" href="{{ url_for("admin") }}">ÁÆ°ÁêÜÂëò</a></p>
-                    <p><a class="btn btn-inverse" href="{{ url_for('delete', post_id=post.id, next="admin") }}">Âà†Èô§</a> </p>
+                    <p><a class="btn btn-inverse" href="{{ url_for("admin") }}">π‹¿Ì‘±</a></p>
+                    <p><a class="btn btn-inverse" href="{{ url_for('delete', post_id=post.id, next="admin") }}">…æ≥˝</a> </p>
                     <p>
-                        <label for="post_draft">ËçâÁ®ø</label>
+                        <label for="post_draft">≤›∏Â</label>
                         <input name="post_draft" type="hidden" value="0" /><input id="post_draft" name="post_draft" type="checkbox" value="1" {% if post.draft %}checked{% endif %} />
                     </p>
                     <p>
                         {% if post.draft %}
-                            <a class="btn btn-inverse" href="#" onclick="issueSaveAjax({{ post.id }}, true)">È¢ÑËßà</a>
+                            <a class="btn btn-inverse" href="{{ url_for('preview', post_id=post.id) }}" target="previewPage" onclick="issueSaveAjax({{ post.id }})">‘§¿¿</a>
                         {% else %}
-                            <a class="btn btn-inverse" href="{{  url_for('view_post_slug', slug=post.slug) }}" target="_blank">Êü•Áúã</a>
+                            <a class="btn btn-inverse" href="{{  url_for('view_post_slug', slug=post.slug) }}" target="_blank">≤Èø¥</a>
                         {% endif %}
                     </p>
                     <p>
-                        <button class="btn btn-inverse" onclick="$('#edit_post').submit()">‰øùÂ≠ò</button>
+                        <button class="btn btn-inverse" onclick="$('#edit_post').submit()">±£¥Ê</button>
                     </p>
                     <p id="AutoSaveDetail">
                         AutoSave: On
                     </p>
+
+                    <div id="drop-upload" class="span12 well well-small" style="word-wrap: break-word;">
+                        Drag files here to upload. Click to insert.
+                        <input style="visibility: collapse; width: 0px;" type="file" onchange="upload(this.files[0])">
+                        <div id="upload_list">
+                        </div>
+                    </div>
+
                 </div>
 
                 <div class="span1">
@@ -66,7 +113,7 @@
                             <div class="span7 offset3">
                                 <div class="expandingArea text-title">
                                     <pre><span></span><br></pre>
-                                    <textarea class="post_title" id="post_title" name="post_title" placeholder="Ê†áÈ¢ò" rows="1">{{ post.title }}</textarea>
+                                    <textarea class="post_title" id="post_title" name="post_title" placeholder="±ÍÃ‚" rows="1">{{ post.title }}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -75,7 +122,7 @@
                             <div class="span7 offset3">
                                 <div class="expandingArea text-content" id="edit_post_area">
                                     <pre><span></span><br></pre>
-                                    <textarea cols="40" id="post_content" name="post_content" placeholder="ÊñáÁ´†ÂÜÖÂÆπ" rows="20">{{ post.text }}</textarea>
+                                    <textarea cols="40" id="post_content" name="post_content" placeholder="Œƒ’¬ƒ⁄»›" rows="20">{{ post.text }}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -91,10 +138,10 @@
             <div id="publish-bar">
                 <div class="contain">
                     <div>
-                        <a href="{{ url_for('admin') }}">ÁÆ°ÁêÜÂëò</a>
+                        <a href="{{ url_for('admin') }}">π‹¿Ì‘±</a>
                     </div>
                     <div>
-                        <a href="{{ url_for('delete', post_id=post.id, next="admin" ) }}" class="delete-bar" data-confirm="‰Ω†Á°ÆÂÆöÂêó?" rel="nofollow">Âà†Èô§</a>
+                        <a href="{{ url_for('delete', post_id=post.id, next="admin" ) }}" class="delete-bar" data-confirm="ƒ„»∑∂®¬?" rel="nofollow">…æ≥˝</a>
                     </div>
 
                 </div>

@@ -7,6 +7,8 @@ import datetime
 import os
 from functools import wraps
 from unicodedata import normalize
+from os import urandom
+from base64 import b32encode
 
 # web stuff and markdown imports
 import markdown
@@ -15,6 +17,9 @@ from werkzeug.security import check_password_hash
 from flask import render_template, request, Flask, flash, redirect, url_for, \
     abort, jsonify, Response, make_response
 from werkzeug.contrib.cache import FileSystemCache, NullCache
+from werkzeug.utils import secure_filename
+import json
+from flask import send_from_directory
 
 try:
     import pygments
@@ -24,14 +29,20 @@ except ImportError:
 
 app = Flask(__name__)
 app.config.from_object('settings')
+app.secret_key =  app.config["SECRET_KEY"] 
 app.debug = True
+UPLOAD_FOLDER = 'uploads/'
+ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+
 db = SQLAlchemy(app)
 cache_directory = os.path.dirname(__file__)
 try:
     cache = FileSystemCache(os.path.join(cache_directory, "cache"))
-except Exception,e:
+except Exception, e:
     print "Could not create cache folder, caching will be disabled."
-    print "Error: %s"%e
+    print "Error: %s" % e
     cache = NullCache()
 
 _punct_re = re.compile(r'[\t !"#$%&\'()*\-/<=>?@\[\\\]^_`{|},.]+')
@@ -158,7 +169,6 @@ def view_post(post_id):
 
 @app.route("/<slug>")
 def view_post_slug(slug):
-
     try:
         post = db.session.query(Post).filter_by(slug=slug, draft=False).one()
     except Exception:
@@ -278,6 +288,32 @@ def preview(post_id):
 
     return render_template("view.html", post=post, preview=True)
 
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
+
+
+@app.route("/upload", methods=["POST"])
+@requires_authentication
+def upload_file():
+    if request.method == 'POST':
+        file_upload = request.files['file']
+        if file and allowed_file(file_upload.filename):
+            filename = secure_filename(file_upload.filename)
+            key = b32encode(urandom(5))
+            filename, extension = os.path.splitext(filename)
+            filename = filename + '_' + key + extension
+            file_upload.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            url = url_for('uploaded_file', filename=filename)
+            return json.dumps({'status': 'ok', 'url': url, 'name': filename})
+    return 'ok'
+            
+
+@app.route('/uploads/<filename>')
+def uploaded_file(filename):
+    return send_from_directory(app.config['UPLOAD_FOLDER'],
+                               filename)
 
 @app.route("/posts.rss")
 def feed():
