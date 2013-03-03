@@ -165,7 +165,7 @@
                                     <div class="expandingArea text-title">
                                         <pre><span></span><br></pre>
                                         <div class="post_header">
-                                            <textarea class="post_title" id="post_title" name="post_title" placeholder="±ÍÃ‚" rows="2">{{ post.title }}</textarea>
+                                            <textarea class="post_title" id="post_title" name="post_title" placeholder="Ê†áÈ¢ò" rows="2">{{ post.title }}</textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -175,7 +175,7 @@
                                 <div class="span7 offset1">
                                     <div class="expandingArea text-content" id="edit_post_area">
                                         <pre><span></span><br></pre>
-                                        <textarea cols="40" id="post_content" name="post_content" placeholder="Œƒ’¬’˝Œƒ" rows="20">{{ post.text }}</textarea>
+                                        <textarea cols="40" id="post_content" name="post_content" placeholder="ÊñáÁ´†Ê≠£Êñá" rows="20">{{ post.text }}</textarea>
                                     </div>
                                 </div>
                             </div>
@@ -185,30 +185,30 @@
                 <div id="publish-bar" class="center">
                     <div class="span1"></div>
                     <div class="span1">
-                        <a class="btn btn-inverse" href="{{ url_for("admin") }}">π‹¿Ì‘±</a>
+                        <a class="btn btn-inverse" href="{{ url_for("admin") }}">ÁÆ°ÁêÜÂëò</a>
                     </div>
                     <div class="span1">
-                        <a class="btn btn-inverse" href="{{ url_for('delete', post_id=post.id, next="admin") }}">…æ≥˝</a>
+                        <a class="btn btn-inverse" href="{{ url_for('delete', post_id=post.id, next="admin") }}">Âà†Èô§</a>
                     </div>
                     <div class="span1">
-                        <label id="auto-save" for="post_draft">≤›∏Â</label>
+                        <label id="auto-save" for="post_draft">ËçâÁ®ø</label>
                         <input name="post_draft" type="hidden" value="0" /><input id="post_draft" name="post_draft" type="checkbox" value="1" {% if post.draft %}checked{% endif %} />
                     </div>
 
 
                     {% if post.draft %}
                         <div class="span1">
-                            <a class="btn btn-inverse" href="{{ url_for('preview', post_id=post.id) }}" target="previewPage" onclick="issueSaveAjax({{ post.id }})">‘§¿¿</a>
+                            <a class="btn btn-inverse" href="{{ url_for('preview', post_id=post.id) }}" target="previewPage" onclick="issueSaveAjax({{ post.id }})">È¢ÑËßà</a>
                         </div>
                     {% else %}
                         <div class="span2">
-                            <a class="btn btn-inverse" href="{{  url_for('view_post_slug', slug=post.slug) }}" target="_blank">≤Èø¥</a>
+                            <a class="btn btn-inverse" href="{{  url_for('view_post_slug', slug=post.slug) }}" target="_blank">Êü•Áúã</a>
                         </div>
                     {% endif %}
 
 
                     <div class="span1">
-                        <button class="btn btn-inverse" onclick="$('#edit_post').submit()">±£¥Ê</button>
+                        <button class="btn btn-inverse" onclick="$('#edit_post').submit()">‰øùÂ≠ò</button>
                     </div>
 
                     <div class="span3">

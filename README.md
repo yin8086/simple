@@ -2,7 +2,7 @@ Simple
 ================
 A clone of [Obtvse](http://github.com/NateW/obtvse).
 
-这是一个中文化的[Simple](https://github.com/orf/simple) 版本
+杩欐槸涓�涓腑鏂囧寲鐨刐Simple](https://github.com/orf/simple) 鐗堟湰
 
 About
 ============
@@ -39,7 +39,7 @@ Example
 ============
 You can see my blog running this software [here](http://tomforb.es/simple).
 
-中文版运行于[这里](http://pyblog.stardrad.com)
+涓枃鐗堣繍琛屼簬[杩欓噷](http://pyblog.stardrad.com)
 
 Screenshots
 ===========
