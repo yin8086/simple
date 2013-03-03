@@ -29,7 +29,7 @@ except ImportError:
 
 app = Flask(__name__)
 app.config.from_object('settings')
-app.secret_key =  app.config["SECRET_KEY"] 
+app.secret_key = app.config["SECRET_KEY"]
 app.debug = True
 UPLOAD_FOLDER = 'uploads/'
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
@@ -138,7 +138,7 @@ def index():
     there_is_more = posts_count > last_possible_post_on_page
 
     return render_template("index.html", 
-                           posts=posts, 
+                           posts=posts,
                            now=datetime.datetime.now(),
                            is_more=there_is_more, 
                            current_page=page, 
@@ -314,6 +314,7 @@ def upload_file():
 def uploaded_file(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'],
                                filename)
+
 
 @app.route("/posts.rss")
 def feed():

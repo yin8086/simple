@@ -1,5 +1,7 @@
 $.fn.autogrow = function() {
 
+    var scrollOnce = false;
+
     this.filter('textarea').each(function() {
 
         var $this       = $(this),
@@ -25,7 +27,19 @@ $.fn.autogrow = function() {
                     .replace(/\n/g, '<br/>');
 
             shadow.html(val);
-            $(this).css('height', Math.max(shadow.height() + 20, minHeight));
+            var new_height = Math.max(shadow.height() + $("#publish-bar").outerHeight() + 30, minHeight);
+            var old_height = $(this).height();
+            $(this).css('height', new_height);
+            if (old_height != new_height){
+                // Hack: update is fired once on page load, so prevent auto-scrolling once.
+                if (scrollOnce == false){
+                    scrollOnce = true;
+                } else {
+                    if (($(window).scrollTop() + $(window).height()) - $(document).height() > -20){
+                        $('html, body').animate({scrollTop: $(document).height()}, 'fast')
+                    }
+                }
+            }
         }
 
         $(this).change(update).keyup(update).keydown(update);
@@ -55,10 +69,10 @@ var isActive;
 
 $(window).focus(function(){
     isActive = true;
-    $("#AutoSaveDetail").css('color','').text('AutoSave: On');
+    $("#auto-save").css('color','').text('Draft');
 }).blur(function(){
         isActive = false;
-        $("#AutoSaveDetail").css('color','red').text('AutoSave: Off');
+        $("#auto-save").css('color','red').text('Draft *');
     });
 
 $(document).ready(function() {
