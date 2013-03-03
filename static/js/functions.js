@@ -69,10 +69,10 @@ var isActive;
 
 $(window).focus(function(){
     isActive = true;
-    $("#auto-save").css('color','').text('Draft');
+    $("#auto-save").css('color','').text('草稿');
 }).blur(function(){
         isActive = false;
-        $("#auto-save").css('color','red').text('Draft *');
+        $("#auto-save").css('color','red').text('草稿 *');
     });
 
 $(document).ready(function() {
