@@ -42,7 +42,7 @@
                                 <li><p><a href="https://github.com/{{ config.GITHUB_USERNAME }}/">Github</a></p></li>
                             {% endif %}
                             {% if config.CONTACT_EMAIL %}
-                                <li><p><p><a href="mailto:{{ config.CONTACT_EMAIL }}?subject:Howdy">ÁªÏµÎÒ</a></p></li>
+                                <li><p><p><a href="mailto:{{ config.CONTACT_EMAIL }}?subject:Howdy">è”ç³»æˆ‘</a></p></li>
                             {% endif %}
                             {% if config.TWITTER_HANDLE %}
                                 <li><p><a href="https://twitter.com/{{ config.TWITTER_HANDLE }}/">Twitter</a></p></li>
@@ -54,24 +54,24 @@
                             {% if config.USE_SUBTOME %}
                             <li>
                                 <p><a onclick="(function(){var z=document.createElement('script');z.src='https://www.subtome.com/load.js';document.body.appendChild(z);})()"
-                                    href="#">¶©ÔÄ</a>
+                                    href="#">è®¢é˜…</a>
                             </li>
                             {% endif %}
 
                             <li>
-                                <p><a href="{{ url_for('feed') }}">¶©ÔÄ</a></p>
+                                <p><a href="{{ url_for('feed') }}">è®¢é˜…</a></p>
                             </li>
 
                             {% if is_admin %}
                                 <li>
-                                    <p><a href="{{ url_for('admin') }}">¹ÜÀíÔ±</a></p>
+                                    <p><a href="{{ url_for('admin') }}">ç®¡ç†å‘˜</a></p>
                                 </li>
                             {% endif %}
 
                             {% block sidebar %}{% endblock %}
                         </ul>
                         <span class="powered-by">
-                        ÖĞÎÄ»¯ÓÚ <a href="https://github.com/yin8086/simple">Simple</a>,
+                        ä¸­æ–‡åŒ–äº <a href="https://github.com/yin8086/simple">Simple</a>,
                           Powered by <a href="http://github.com/orf/simple">Simple</a>,
                             inspired by <a href="https://github.com/NateW/obtvse">Obtvse</a>
                         </span>
@@ -97,9 +97,9 @@
                     <div class="span12">
                         <time>
                             {% if post %}
-                                ·¢±íÓÚ {{ post.created_at.strftime('%Y-%m-%d') }}
+                                å‘è¡¨äº {{ post.created_at.strftime('%Y-%m-%d') }}
                                 {% if post.created_at.strftime('%Y-%m-%d') != post.updated_at.strftime('%Y-%m-%d') %}
-                                    , ¸üĞÂÓÚ {{ post.updated_at.strftime('%Y-%m-%d') }}
+                                    , æ›´æ–°äº {{ post.updated_at.strftime('%Y-%m-%d') }}
                                 {% endif %}
                             {% else %}
                                 <div class="visible-phone">
