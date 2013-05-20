@@ -4,6 +4,18 @@ from werkzeug.security import generate_password_hash
 from os import urandom
 from base64 import b32encode
 import sys
+import getpass
+
+if "--help" in sys.argv:
+    print "create_config.py:"
+    print "Options:"
+    print "  * --fresh"
+    print "    Over-write existing config if it exists"
+    print "  * --update"
+    print "    Update existing config (Default if the config exists)"
+    print "  * --changepass"
+    print "    Change the admin password"
+    sys.exit(1)
 
 try:
     import settings
@@ -14,9 +26,25 @@ except (ImportError, SyntaxError):
     settings = None
 
 
-def input_with_default(name, prompt, default, func=lambda v: v, _input_func=raw_input):
+def input_with_default(*args, **kwargs):
+    _type = kwargs.pop("_type", None)
+
+    name, res = _input_with_default(*args, **kwargs)
+
+    if _type is None:
+        return name, res
+    else:
+        try:
+            return name, _type(res)
+        except ValueError:
+            print "Error: Value %s is not the correct type. Please re-enter" % res
+            return input_with_default(*args, _type=_type, **kwargs)
+
+
+def _input_with_default(name, prompt, default, func=lambda v: v, _input_func=raw_input):
     """ Small wrapper around raw_input for prompting and defaulting """
-    if "--update" in sys.argv and settings is not None:
+    if ("--update" in sys.argv and ("--changepass" in sys.argv and name != "ADMIN_PASSWORD"))\
+            and settings is not None:
         # We are updating. If the name already exists in the settings object
         # then we ignore it and return the existing value
         try:
@@ -36,13 +64,13 @@ def input_with_default(name, prompt, default, func=lambda v: v, _input_func=raw_
 def input_password(*args, **kwargs):
     # This should make input_with_default use getpass.getpass instead of raw_input, however
     # in PyCharm this causes issues. Stick with raw-input for now.
-    name, response = input_with_default(*args, **kwargs)
+    name, response = input_with_default(*args, _input_func=getpass.getpass, **kwargs)
     return name, generate_password_hash(response)
 
 
 print "%s a Simple config file. Please answer some questions:" % ("Updating" if "--update" in sys.argv else "Generating")
 SETTINGS = (
-    input_with_default("POSTS_PER_PAGE", "Posts per page", 5),
+    input_with_default("POSTS_PER_PAGE", "Posts per page", 5, _type=int),
     input_with_default("POST_CONTENT_ON_HOMEPAGE", "Show the post content on the homepage",
                        "y", lambda v: v.lower()[0] == "y"),
     input_with_default("SHOW_VIEWS_ON_HOMEPAGE", "Show post view count on the homepage?",
@@ -59,7 +87,8 @@ SETTINGS = (
     input_with_default("FONT_NAME", "Font Name (Selected from google font library): ", "Source Sans Pro",
                        lambda v: v.replace(" ", "+")),
     input_with_default("SECRET_KEY", "Secret key", b32encode(urandom(32))),
-    input_with_default("DISQUS_SHORTNAME", "Disqus Shortname", "")
+    input_with_default("DISQUS_SHORTNAME", "Disqus Shortname", ""),
+    input_with_default("USE_SUBTOME", "Enable SubToMe integration", "y", lambda v: v.lower()[0] == "y")
 )
 
 with open("settings.py", "w") as fd:

@@ -31,27 +31,24 @@
             </div>
             <br/>
             {{ post.render_content()|safe }}
-            {% if is_admin %}
-
-            {% endif %}
         </div>
 
         <br/>
         <a class="btn btn-inverse" href="{{ url_for('index', page=pid) }}">返回博客</a>
         <br/>
 
-        {% if config.DISQUS_SHORTNAME %}
+        {% if config.DISQUS_SHORTNAME and not post.draft %}
             <br/><br/>
 
             <div id="disqus_thread"></div>
             <script type="text/javascript">
-                /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-                var disqus_shortname = '{{ config.DISQUS_SHORTNAME }}'; // required: replace example with your forum shortname
-
+                var disqus_shortname = '{{ config.DISQUS_SHORTNAME }}';
+                var disqus_identifier = '{{ post.id }}';
+                
                 /* * * DON'T EDIT BELOW THIS LINE * * */
                 (function() {
                     var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-                    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
                     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
                 })();
             </script>

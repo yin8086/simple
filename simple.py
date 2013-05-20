@@ -5,11 +5,12 @@
 import re
 import datetime
 import os
+import time
 from functools import wraps
 from unicodedata import normalize
 from os import urandom
 from base64 import b32encode
-
+from email import utils
 # web stuff and markdown imports
 import markdown
 from flask.ext.sqlalchemy import SQLAlchemy
@@ -129,7 +130,7 @@ def index():
 
     posts = posts_master\
         .limit(app.config["POSTS_PER_PAGE"])\
-        .offset(page * app.config["POSTS_PER_PAGE"]) .all()
+        .offset(page * int(app.config["POSTS_PER_PAGE"])) .all()
 
     # Sorry for the verbose names, but this seemed like a sensible
     # thing to do.
@@ -148,7 +149,11 @@ def index():
 @app.route("/style.css")
 def render_font_style():
     t = render_template("font_style.css", font_name=app.config["FONT_NAME"])
-    return Response(t, mimetype="text/css")
+    expires = datetime.datetime.now() + datetime.timedelta(days=10)
+    return Response(t, mimetype="text/css",
+                    headers={'Expires': utils.formatdate(
+                        time.mktime(expires.timetuple())
+                    )})
 
 
 @app.route("/<int:post_id>")
@@ -222,8 +227,9 @@ def edit(post_id):
         if any(request.form.getlist("post_draft", type=int)):
             post.draft = True
         else:
-            post.draft = False
-            post.updated_at = datetime.datetime.now()
+            if post.draft:
+                post.draft = False
+                post.updated_at = datetime.datetime.now()
 
         db.session.add(post)
         db.session.commit()
@@ -312,8 +318,13 @@ def upload_file():
 
 @app.route('/uploads/<filename>')
 def uploaded_file(filename):
-    return send_from_directory(app.config['UPLOAD_FOLDER'],
+    resp = send_from_directory(app.config['UPLOAD_FOLDER'],
                                filename)
+    dt = datetime.datetime.now() + datetime.timedelta(days=30)
+    resp.headers["Expires"] = utils.formatdate(
+        time.mktime(dt.timetuple())
+    )
+    return resp
 
 
 @app.route("/posts.rss")

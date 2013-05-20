@@ -2,11 +2,11 @@
 <html lang="zh-CN">
     <head>
         <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet" media="screen" />
-        <link href="{{ url_for('static', filename='css/layout.css') }}" rel="stylesheet" media="screen" />
-        <link href="{{ url_for('static', filename='css/pygments.css') }}" rel="stylesheet" media="screen" />
-        <link href='http://fonts.googleapis.com/css?family={{ config.FONT_NAME|replace(' ','+') }}:400,900' rel='stylesheet' type='text/css' />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="alternate" type="application/rss+xml" title="RSS" href="{{ url_for('feed') }}">
+        <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet" media="screen">
+        <link href="{{ url_for('static', filename='css/layout.css') }}" rel="stylesheet" media="screen">
+        <link href='//fonts.googleapis.com/css?family={{ config.FONT_NAME|replace(' ','+') }}:400,900' rel='stylesheet' type='text/css'>
         <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-1.7.2.min.js') }}"></script>
         <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap-modal.js') }}"></script>
         <link href="/style.css" rel="stylesheet" type="text/css">
@@ -42,7 +42,7 @@
                                 <li><p><a href="https://github.com/{{ config.GITHUB_USERNAME }}/">Github</a></p></li>
                             {% endif %}
                             {% if config.CONTACT_EMAIL %}
-                                <li><p><p><a href="mailto:{{ config.CONTACT_EMAIL }}?subject:Howdy">ËÅîÁ≥ªÊàë</a></p></li>
+                                <li><p><p><a href="mailto:{{ config.CONTACT_EMAIL }}?subject:Howdy">¡™œµŒ“</a></p></li>
                             {% endif %}
                             {% if config.TWITTER_HANDLE %}
                                 <li><p><a href="https://twitter.com/{{ config.TWITTER_HANDLE }}/">Twitter</a></p></li>
@@ -51,20 +51,27 @@
                                 <li><p><a href="https://plus.google.com/{{ config.GOOGLE_PLUS_PROFILE }}/posts">Google+</a></p></li>
                             {% endif %}
 
+                            {% if config.USE_SUBTOME %}
                             <li>
-                                <p><a href="{{ url_for('feed') }}">ËÆ¢ÈòÖ</a></p>
+                                <p><a onclick="(function(){var z=document.createElement('script');z.src='https://www.subtome.com/load.js';document.body.appendChild(z);})()"
+                                    href="#">∂©‘ƒ</a>
+                            </li>
+                            {% endif %}
+
+                            <li>
+                                <p><a href="{{ url_for('feed') }}">∂©‘ƒ</a></p>
                             </li>
 
                             {% if is_admin %}
                                 <li>
-                                    <p><a href="{{ url_for('admin') }}">ÁÆ°ÁêÜÂëò</a></p>
+                                    <p><a href="{{ url_for('admin') }}">π‹¿Ì‘±</a></p>
                                 </li>
                             {% endif %}
 
                             {% block sidebar %}{% endblock %}
                         </ul>
                         <span class="powered-by">
-                        ‰∏≠ÊñáÂåñ‰∫é <a href="https://github.com/yin8086/simple">Simple</a>,
+                        ÷–ŒƒªØ”⁄ <a href="https://github.com/yin8086/simple">Simple</a>,
                           Powered by <a href="http://github.com/orf/simple">Simple</a>,
                             inspired by <a href="https://github.com/NateW/obtvse">Obtvse</a>
                         </span>
@@ -90,9 +97,9 @@
                     <div class="span12">
                         <time>
                             {% if post %}
-                                ÂèëË°®‰∫é {{ post.created_at.strftime('%Y-%m-%d') }}
+                                ∑¢±Ì”⁄ {{ post.created_at.strftime('%Y-%m-%d') }}
                                 {% if post.created_at.strftime('%Y-%m-%d') != post.updated_at.strftime('%Y-%m-%d') %}
-                                    , Êõ¥Êñ∞‰∫é {{ post.updated_at.strftime('%Y-%m-%d') }}
+                                    , ∏¸–¬”⁄ {{ post.updated_at.strftime('%Y-%m-%d') }}
                                 {% endif %}
                             {% else %}
                                 <div class="visible-phone">
